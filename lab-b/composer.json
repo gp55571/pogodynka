@@ -1,0 +1,15 @@
+{
+    "name": "pguzowski/lab-pogodynka",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Pguzowski\\LabPogodynka\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Piotr Guzowski"
+        }
+    ],
+    "require": {}
+}
