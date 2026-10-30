@@ -1,28 +1,63 @@
+
 <!DOCTYPE html>
 <html>
-    <head>
-        <style>
-            body {
-                background: url("https://placehold.co/100x100/FFFFFF/EFEFEF/png?text=55571");
-            }
-        </style>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-        {% block stylesheets %}
-        {% endblock %}
+<head>
+    <style>
+        body {
+            background: url("https://placehold.co/100x100/FFFFFF/EFEFEF/png?text=55571");
+        }
+    </style>
 
-        {% block javascripts %}
-        {% endblock %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        {% set frankenphp_hot_reload = app.request.server.get('FRANKENPHP_HOT_RELOAD') %}
-        {% if frankenphp_hot_reload %}
+    <title>{% block title %}Welcome!{% endblock %}</title>
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    {% block stylesheets %}
+    {% endblock %}
+
+    {% block javascripts %}
+    {% endblock %}
+
+    {% set frankenphp_hot_reload = app.request.server.get('FRANKENPHP_HOT_RELOAD') %}
+    {% if frankenphp_hot_reload %}
         <meta name="frankenphp-hot-reload:url" content="{{ frankenphp_hot_reload }}">
         <script src="https://cdn.jsdelivr.net/npm/idiomorph"></script>
         <script src="https://cdn.jsdelivr.net/npm/frankenphp-hot-reload/+esm" type="module"></script>
-        {% endif %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+    {% endif %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" defer></script>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary mb-4">
+    <div class="container">
+        <a class="navbar-brand" href="{{ path('app_location_index') }}">Pogodynka</a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Przełącz nawigację">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('app_location_index') }}">Miasta</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('app_measurement_index') }}">Pomiary</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    {% block body %}{% endblock %}
+</div>
+
+</body>
 </html>

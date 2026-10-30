@@ -1,0 +1,45 @@
+App\Entity\Location:
+    properties:
+        latitude:
+            - Range:
+                  min: -90
+                  max: 90
+        longitude:
+            - Range:
+                  min: -180
+                  max: 180
+
+App\Entity\Measurement:
+    properties:
+        date:
+            - NotNull:
+                  message: 'Please enter a date'
+        temperature:
+            - NotNull:
+                  message: 'Please enter a temperature'
+            - Range:
+                  min: -90
+                  max: 60
+                  notInRangeMessage: 'Temperature must be between -90 and 60'
+        pressure:
+            - NotNull:
+                  message: 'Please enter a pressure'
+            - Range:
+                  min: 800
+                  max: 1200
+                  notInRangeMessage: 'Pressure must be between 800 and 1200 hPa'
+        humidity:
+            - NotNull:
+                  message: 'Please enter a humidity'
+            - Range:
+                  min: 0
+                  max: 100
+                  notInRangeMessage: 'Humidity must be between 0 and 100'
+        weatherCondition:
+            - NotBlank:
+                  message: 'Please enter a weather condition'
+            - Length:
+                  min: 2
+                  max: 100
+                  minMessage: 'Weather condition length must be between 2 and 100'
+                  maxMessage: 'Weather condition length must be between 2 and 100'
