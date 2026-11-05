@@ -7,5 +7,7 @@
 
     {{ include('measurement/_form.html.twig') }}
 
-    <a href="{{ path('app_measurement_index') }}">back to list</a>
+    {% if is_granted('ROLE_MEASUREMENT_INDEX') %}
+        <a href="{{ path('app_measurement_index') }}">back to list</a>
+    {% endif %}
 {% endblock %}

@@ -7,14 +7,16 @@
 
     <table class="table">
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>City</th>
-                <th>Country</th>
-                <th>Latitude</th>
-                <th>Longitude</th>
+        <tr>
+            <th>Id</th>
+            <th>City</th>
+            <th>Country</th>
+            <th>Latitude</th>
+            <th>Longitude</th>
+            {% if is_granted('ROLE_LOCATION_SHOW') or is_granted('ROLE_LOCATION_EDIT') %}
                 <th>actions</th>
-            </tr>
+            {% endif %}
+        </tr>
         </thead>
         <tbody>
         {% for location in locations %}
@@ -24,10 +26,16 @@
                 <td>{{ location.country }}</td>
                 <td>{{ location.latitude }}</td>
                 <td>{{ location.longitude }}</td>
-                <td>
-                    <a href="{{ path('app_location_show', {'id': location.id}) }}">show</a>
-                    <a href="{{ path('app_location_edit', {'id': location.id}) }}">edit</a>
-                </td>
+                {% if is_granted('ROLE_LOCATION_SHOW') or is_granted('ROLE_LOCATION_EDIT') %}
+                    <td>
+                        {% if is_granted('ROLE_LOCATION_SHOW') %}
+                            <a href="{{ path('app_location_show', {'id': location.id}) }}">show</a>
+                        {% endif %}
+                        {% if is_granted('ROLE_LOCATION_EDIT') %}
+                            <a href="{{ path('app_location_edit', {'id': location.id}) }}">edit</a>
+                        {% endif %}
+                    </td>
+                {% endif %}
             </tr>
         {% else %}
             <tr>
@@ -37,5 +45,8 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_location_new') }}">Create new</a>
+    {% if is_granted('ROLE_LOCATION_NEW') %}
+        <a href="{{ path('app_location_new') }}">Create new</a>
+    {% endif %}
+
 {% endblock %}
