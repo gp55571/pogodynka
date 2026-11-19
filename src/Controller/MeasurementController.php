@@ -30,13 +30,16 @@ final class MeasurementController extends AbstractController
     {
         $measurement = new Measurement();
         $form = $this->createForm(MeasurementType::class, $measurement);
+        //, [
+//           'validation_groups' => ['new'],
+//        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($measurement);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_measurement_index', [], Response::HTTP_SEE_OTHER);
+//            return $this->redirectToRoute('app_measurement_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('measurement/new.html.twig', [
