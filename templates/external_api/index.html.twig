@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Prognoza pogody – Open-Meteo{% endblock %}
+
+{% block body %}
+    <h1>Prognoza pogody (Open-Meteo)</h1>
+
+    {{ form(form) }}
+
+    {% if error %}
+        <div class="alert alert-danger mt-3" role="alert">
+            {{ error }}
+        </div>
+    {% endif %}
+
+    {% if forecast is not null and forecast.daily is defined and forecast.daily.time is not empty %}
+        <h2 class="mt-4">Dane z Open-Meteo</h2>
+        <p class="text-muted">
+            Pozycja: {{ forecast.latitude }}, {{ forecast.longitude }}
+            (wysokość: {{ forecast.elevation }} m n.p.m., strefa: {{ forecast.timezone }})
+        </p>
+
+        <table class="table table-striped mt-3">
+            <thead>
+            <tr>
+                <th>Data</th>
+                <th>Temp. maksymalna ({{ forecast.daily_units.temperature_2m_max ?? '°C' }})</th>
+                <th>Temp. minimalna ({{ forecast.daily_units.temperature_2m_min ?? '°C' }})</th>
+                <th>Suma opadów ({{ forecast.daily_units.precipitation_sum ?? 'mm' }})</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for i in 0..(forecast.daily.time|length - 1) %}
+                <tr>
+                    <td>{{ forecast.daily.time[i] }}</td>
+                    <td>{{ forecast.daily.temperature_2m_max[i] }}</td>
+                    <td>{{ forecast.daily.temperature_2m_min[i] }}</td>
+                    <td>{{ forecast.daily.precipitation_sum[i] }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}

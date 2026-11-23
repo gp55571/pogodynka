@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formularz tekstowy{% endblock %}
+
+{% block body %}
+    <h1>Text Submission Form</h1>
+
+    {{ form(form) }}
+
+    {% if text is not null %}
+        <h2>Submitted Text</h2>
+
+        <p>Z escapingiem: {{ text }}</p>
+
+        <p>Surowa wartość: {{ text|raw }}</p>
+    {% endif %}
+{% endblock %}
